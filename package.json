@@ -1,0 +1,19 @@
+{
+  "name": "interior",
+  "version": "1.0.0",
+  "description": "interior decoration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tvpeter/interior.git"
+  },
+  "author": "tvpeter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tvpeter/interior/issues"
+  },
+  "homepage": "https://github.com/tvpeter/interior#readme"
+}
