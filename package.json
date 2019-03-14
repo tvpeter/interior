@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tvpeter/interior/issues"
   },
-  "homepage": "https://github.com/tvpeter/interior#readme"
+  "homepage": "https://github.com/tvpeter/interior#readme",
+  "dependencies": {
+    "express": "4.16.4"
+  }
 }
