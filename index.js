@@ -19,11 +19,12 @@ const nav = [
     { link : '/contact', title: 'Contact'},
 ]
 app.get('/', (req, res)=> {
-    res.render('index', {nav, title: "FMG Furniture | Homepage"});
+    res.render('index', {nav, current: "Home", title: "FMG Furniture | Homepage"});
 });
 app.get('/about', (req, res)=>{
     res.render('about', {
         nav,
+        current: "About Us",
         title: "FMG Furniture | About Us",
         header: "About Us"
     });
@@ -31,6 +32,7 @@ app.get('/about', (req, res)=>{
 app.get('/services', (req, res)=> {
     res.render('services', {
         nav,
+        current: "Services",
         title : "FMG Furniture | Services",
         header: "Our Services"
     });
@@ -38,6 +40,7 @@ app.get('/services', (req, res)=> {
 app.get('/contact', (req, res)=> {
     res.render('contact', {
         nav,
+        current : "Contact",
         title : "FMG Furniture | Contact",
         header: "Contact Us"
     });
@@ -45,6 +48,7 @@ app.get('/contact', (req, res)=> {
 app.get('/products', (req, res)=> {
     res.render('products', {
         nav,
+        current: "Products",
         title : "FMG Furniture | Products",
         header: "Our Products"
     });
@@ -52,6 +56,7 @@ app.get('/products', (req, res)=> {
 app.get('/products/details', (req, res)=>{
     res.render('details', {
         nav,
+        current: "Products",
         title : "FMG Furniture | Products",
         header: "Product Details"
     });

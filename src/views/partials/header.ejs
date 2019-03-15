@@ -72,9 +72,10 @@
                                 
                                 <div class="navbar-collapse collapse clearfix">
                                     <ul class="navigation clearfix">
-                                        <% for (let item of nav) { %>
-                                    <li><a href="<%= item.link %>"><%= item.title %></a></li>
-                                        <% } %>
+                                    <% for (let item of nav) { %>
+                                    <li <% if(item.title === current){ %><%= "class=current" %><% }%>>
+                                        <a href="<%= item.link %>"><%= item.title %></a></li>
+                                    <% } %>
                                      </ul>
                                 </div>
                             </nav><!-- Main Menu End-->
@@ -105,8 +106,9 @@
                 <!-- .navigation -->
                     <ul class="navigation">
                             <% for (let item of nav) { %>
-                        <li><a href="<%= item.link %>"><%= item.title %></a></li>
-                            <% } %>
+                                <li <% if(item.title === current){ %><% "class=current" %><% }%>>
+                                    <a href="<%= item.link %>"><%= item.title %></a></li>
+                                    <% } %>
                     </ul>
                 </div><!-- /.Side-menu -->
             
