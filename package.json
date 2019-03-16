@@ -5,10 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --verbose"
   },
   "engines": {
     "node": "11.6.0"
+  },
+  "jest" : {
+    "verbose" : true,
+    "moduleFileExtensions": [ "js", "ejs"]
   },
   "repository": {
     "type": "git",
