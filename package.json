@@ -10,7 +10,6 @@
   "engines": {
     "node": "11.6.0"
   },
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tvpeter/interior.git"
@@ -24,6 +23,7 @@
   "dependencies": {
     "ejs": "2.6.1",
     "express": "4.16.4",
+    "mongoose": "5.4.19",
     "path": "0.12.7"
   },
   "devDependencies": {

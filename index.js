@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -10,6 +11,11 @@ app.use('/css', express.static(path.join(__dirname, 'public/css/')));
 app.use('/js', express.static(path.join(__dirname, 'public/js/')));
 app.use('/images', express.static(path.join(__dirname, 'public/images/')));
 const port = process.env.PORT || 3000;
+
+mongoose.connect('mongodb://localhost/interior')
+.then(()=>{console.log(`Connected to mongodb`)})
+.catch(err => console.log(`Failed to connect to mongodb`));
+
 
 const nav = [ 
     { link : '/', title : 'Home'},
