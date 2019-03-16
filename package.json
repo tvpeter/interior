@@ -10,10 +10,7 @@
   "engines": {
     "node": "11.6.0"
   },
-  "jest" : {
-    "verbose" : true,
-    "moduleFileExtensions": [ "js", "ejs"]
-  },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tvpeter/interior.git"
