@@ -16,6 +16,8 @@ mongoose.connect('mongodb://localhost/interior')
 .then(()=>{console.log(`Connected to mongodb`)})
 .catch(err => console.log(`Failed to connect to mongodb`));
 
+app.use(express.json());
+
 
 const nav = [ 
     { link : '/', title : 'Home'},
