@@ -18,7 +18,6 @@ mongoose.connect('mongodb://localhost/interior')
 
 app.use(express.json());
 
-
 const nav = [ 
     { link : '/', title : 'Home'},
     { link : '/about', title: 'About Us'},
@@ -27,20 +26,15 @@ const nav = [
     { link : '/contact', title: 'Contact'},
 ];
 const users = require('./src/routes/user')(nav);
+const about = require('./src/routes/about')(nav);
 
 app.use('/users', users);
+app.use('/about', about);
 
 app.get('/', (req, res)=> {
     res.render('index', {nav, current: "Home", title: "FMG Furniture | Homepage"});
 });
-app.get('/about', (req, res)=>{
-    res.render('about', {
-        nav,
-        current: "About Us",
-        title: "FMG Furniture | About Us",
-        header: "About Us"
-    });
-});
+
 app.get('/services', (req, res)=> {
     res.render('services', {
         nav,
