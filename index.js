@@ -23,7 +23,11 @@ const nav = [
     { link : '/services', title: 'Services'},
     { link : '/products', title: 'Products'},
     { link : '/contact', title: 'Contact'},
-]
+];
+const users = require('./src/routes/user')(nav);
+
+app.use('/users', users);
+
 app.get('/', (req, res)=> {
     res.render('index', {nav, current: "Home", title: "FMG Furniture | Homepage"});
 });
