@@ -29,11 +29,13 @@ const users = require('./src/routes/user')(nav);
 const about = require('./src/routes/about')(nav);
 const services = require('./src/routes/services')(nav);
 const contact = require('./src/routes/contact')(nav);
+const products = require('./src/routes/products')(nav);
 
 app.use('/users', users);
 app.use('/about', about);
 app.use('/services', services);
 app.use('/contact', contact);
+app.use('/products', products);
 
 app.get('/', (req, res)=> {
     res.render('index', {nav, current: "Home", title: "FMG Furniture | Homepage"});
@@ -41,14 +43,6 @@ app.get('/', (req, res)=> {
 
 
 
-app.get('/products', (req, res)=> {
-    res.render('products', {
-        nav,
-        current: "Products",
-        title : "FMG Furniture | Products",
-        header: "Our Products"
-    });
-});
 app.get('/products/details', (req, res)=>{
     res.render('details', {
         nav,
