@@ -41,8 +41,6 @@ app.get('/', (req, res)=> {
     res.render('index', {nav, current: "Home", title: "FMG Furniture | Homepage"});
 });
 
-
-
 app.get('/products/details', (req, res)=>{
     res.render('details', {
         nav,
