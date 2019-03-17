@@ -27,22 +27,17 @@ const nav = [
 ];
 const users = require('./src/routes/user')(nav);
 const about = require('./src/routes/about')(nav);
+const services = require('./src/routes/services')(nav);
 
 app.use('/users', users);
 app.use('/about', about);
+app.use('/services', services);
 
 app.get('/', (req, res)=> {
     res.render('index', {nav, current: "Home", title: "FMG Furniture | Homepage"});
 });
 
-app.get('/services', (req, res)=> {
-    res.render('services', {
-        nav,
-        current: "Services",
-        title : "FMG Furniture | Services",
-        header: "Our Services"
-    });
-});
+
 app.get('/contact', (req, res)=> {
     res.render('contact', {
         nav,
