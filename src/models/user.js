@@ -16,10 +16,10 @@ function validateUser(user){
         email:Joi.string().email({minDomainAtoms:2}).required(),
         phone:Joi.string().min(11).max(14).required(),
         password:Joi.string().min(6).max(24).required(),
-        pconfirm:Joi.string().required().valid(Joi.ref('password')).options({
+        password_confirmation:Joi.string().required().valid(Joi.ref('password')).options({
             language: {
                 any : {
-                    allowOnly: 'Password do  not match'
+                    allowOnly: ' do  not match'
                 }
             }
         })
