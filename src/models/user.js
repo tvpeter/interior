@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const userSchema = new mongoose.Schema({
-    name: { type: String, required: true, trim:true, minlength:4, maxlength:45},
+    name: { type: String, required: true, trim:true, minlength:4, maxlength:45, unique:true},
     email: { type: String, required: true, unique:true, trim: true},
     phone: {type: String, required: true, unique:true, trim:true, minlength:11, maxlength:15},
     password:{type: String, required: true, minlength:6, maxlength:24}
