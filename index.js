@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 
+
 const app = express();
 
 app.set('views', './src/views/');
@@ -12,9 +13,7 @@ app.use('/js', express.static(path.join(__dirname, 'public/js/')));
 app.use('/images', express.static(path.join(__dirname, 'public/images/')));
 const port = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost/interior', {useNewUrlParser:true, useCreateIndex: true})
-.then(()=>{console.log(`Connected to mongodb`)})
-.catch(err => console.log(`Failed to connect to mongodb`));
+require('./startup/db')();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
