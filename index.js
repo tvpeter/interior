@@ -26,6 +26,13 @@ const nav = [
     { link : '/products', title: 'Products'},
     { link : '/contact', title: 'Contact'},
 ];
+let pageDetails = {
+    current: "",
+    title: "",
+    header: "",
+    error: ""
+}
+
 const users = require('./src/routes/user')(nav);
 const about = require('./src/routes/about')(nav);
 const services = require('./src/routes/services')(nav);
@@ -39,7 +46,9 @@ app.use('/contact', contact);
 app.use('/products', products);
 
 app.get('/', (req, res)=> {
-    res.render('index', {nav, current: "Home", title: "FMG Furniture | Homepage"});
+    pageDetails.current = "Home";
+    pageDetails.title = "FMG Furniture | Homepage";
+    res.render('index', {nav, pageDetails});
 });
 
 app.get('/products/details', (req, res)=>{

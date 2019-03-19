@@ -21,16 +21,16 @@ const postUsers = router.post('/', async (req, res)=>{
     //if request is not valid, return 400
 
     const { error } = validate(req.body);
-    pageDetails.error = error.details[0].message;
     if(error) { 
+    pageDetails.error = error.details[0].message;
     return res.render('register', {
         nav, 
         pageDetails
     });
     }
+
     //if user exist, return 400
     const userMail = await User.findOne({'email' :req.body.email});
-
     if(userMail) {
         pageDetails.error = "User already exist with given mail";
         return res.render('register', {
@@ -40,7 +40,6 @@ const postUsers = router.post('/', async (req, res)=>{
     }
 
     const userPhone = await User.findOne({'phone':req.body.phone});
-
     if(userPhone) {
         pageDetails.error = "User already exist with given phone number";
         return res.render('register', {
