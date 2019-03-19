@@ -12,33 +12,35 @@
                     <div class="sec-title medium">
                         <h2>Register New User</h2>
                     </div>
-                    
+                    <% if(error) {%>
+                    <%= error %>
+                    <%}%>
                     <div class="styled-form login-form">
-                        <form method="post" action="http://world5.commonsupport.com/html2/decorators/index.html">
+                        <form method="post" action="/users" name="form1">
                             <div class="form-group">
                                 <span class="adon-icon"><span class="fa fa-user"></span></span>
-                                <input type="text" name="username" required placeholder="Your Name *">
+                                <input type="text" name="name" required placeholder="Your Name *">
                             </div>
                             <div class="form-group">
                                 <span class="adon-icon"><span class="fa fa-envelope-o"></span></span>
-                                <input type="email" name="useremil" placeholder="Enter Mail id *" required>
+                                <input type="email" name="email" placeholder="Enter email" required>
                             </div>
                             <div class="form-group">
                             <span class="adon-icon"><span class="fa fa-phone"></span></span>
-                            <input type="email" name="useremil" placeholder="Phone number" required>
+                            <input type="text" name="phone" placeholder="Phone number" required>
                         </div>
                             <div class="form-group">
                                 <span class="adon-icon"><span class="fa fa-unlock-alt"></span></span>
-                                <input type="password" name="userpassword" placeholder="Enter Password" required>
+                                <input type="password" name="password" placeholder="Enter Password" required>
                             </div>
 
                             <div class="form-group">
                             <span class="adon-icon"><span class="fa fa-unlock-alt"></span></span>
-                            <input type="password" name="userpassword" placeholder="Confirm Password" required>
+                            <input type="password" name="pconfirm" placeholder="Confirm Password" required>
                         </div>
                         <div class="clearfix">
                                 <div class="form-group pull-left">
-                                    <button type="button" class="theme-btn btn-style-two">Register</button>
+                                    <button type="submit" class="theme-btn btn-style-two">Register</button>
                                 </div>
                             </div>
                             
