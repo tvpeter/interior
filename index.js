@@ -12,7 +12,7 @@ app.use('/js', express.static(path.join(__dirname, 'public/js/')));
 app.use('/images', express.static(path.join(__dirname, 'public/images/')));
 const port = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost/interior')
+mongoose.connect('mongodb://localhost/interior', {useNewUrlParser:true, useCreateIndex: true})
 .then(()=>{console.log(`Connected to mongodb`)})
 .catch(err => console.log(`Failed to connect to mongodb`));
 

@@ -1,14 +1,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title><%= title %></title>
-    <!-- Stylesheets -->
+    <title><%= pageDetails.title %></title>
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/revolution-slider.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-    <!-- Responsive -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link href="/css/responsive.css" rel="stylesheet">
@@ -18,9 +16,7 @@
     
     <div class="page-wrapper">
          
-        <!-- Main Header-->
         <header class="main-header">
-            <!-- Header Top -->
             <div class="header-top">
                 <div class="auto-container">
                     <div class="row clearfix">
@@ -73,7 +69,7 @@
                                 <div class="navbar-collapse collapse clearfix">
                                     <ul class="navigation clearfix">
                                     <% for (let item of nav) { %>
-                                    <li <% if(item.title === current){ %><%= "class=current" %><% }%>>
+                                    <li <% if(item.title === pageDetails.current){ %><%= "class=current" %><% }%>>
                                         <a href="<%= item.link %>"><%= item.title %></a></li>
                                     <% } %>
                                      </ul>
@@ -84,8 +80,7 @@
     
                         <div class="nav-toggler">
                         <button class="hidden-bar-opener"><span class="icon fa fa-bars"></span></button>
-                        </div><!-- / Hidden Nav Toggler -->
-                    
+                        </div>
                     </div>    
                 </div>
             </div>
@@ -106,7 +101,7 @@
                 <!-- .navigation -->
                     <ul class="navigation">
                     <% for (let item of nav) { %>
-                        <li <% if(item.title === current){ %><% "class=current" %><% }%>>
+                        <li <% if(item.title === pageDetails.current){ %><% "class=current" %><% }%>>
                             <a href="<%= item.link %>"><%= item.title %></a></li>
                     <% } %>
                     </ul>
@@ -121,6 +116,6 @@
                     </ul>
                 </div>
             
-            </div><!-- / Hidden Bar Wrapper -->
+            </div>
         </section>
     
