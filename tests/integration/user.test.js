@@ -45,6 +45,13 @@ describe('Describe users', ()=> {
             expect(result.status).toBe(400);
        });
 
+       it('should return error 400 if password and its confirmation does not match', async ()=>{
+            user.password = 'newpassword';
+
+            const result = await exec();
+            expect(result.status).toBe(400);
+       });
+
        it('should return error 409 if given email already exist', async ()=>{
            const newUser = new User({
                 name: 'New User',  email : 'email@email.com',

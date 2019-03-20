@@ -18,34 +18,40 @@ const getUsers = router.get('/', (req, res)=>{
 
 const postUsers = router.post('/', async (req, res)=>{
 
+    const result = (errorCode) => {return res.status(errorCode).render('register', {nav, pageDetails})}
+
     //return if request does not contain all params
     const { error } = validate(req.body);
     if(error) { 
     pageDetails.error = error.details[0].message;
-    return res.status(400).render('register', { nav, pageDetails }); }
+    return result(400);
+    }
+
 
     //return if password and confirmation does not match
     if(req.body.password !== req.body.password_confirmation) {
         pageDetails.error = "Password confirmation does not match";
-        return res.status(400).render('register', {nav, pageDetails});
+        return result(400);
     }
 
     //return if user name or email or phone exists
     const userName = await User.findOne({'name': req.body.name});
     if(userName){
         pageDetails.error = "User already registered";
-        return res.status(409).render('register', { nav, pageDetails});
+        return result(409);
     }
 
     const userMail = await User.findOne({'email' :req.body.email});
     if(userMail) {
         pageDetails.error = "User already exist with given mail";
-        return res.status(409).render('register', { nav, pageDetails }); }
+        return result(409);
+    }
 
     const userPhone = await User.findOne({'phone':req.body.phone});
     if(userPhone) {
         pageDetails.error = "User already exist with given phone number";
-        return res.status(409).render('register', { nav,  pageDetails });  }
+        return result(409);
+    }
 
     //create a new user
     const newUser = new User({
@@ -56,10 +62,10 @@ const postUsers = router.post('/', async (req, res)=>{
     });
     try {
         await newUser.save();
-        return res.status(200).render('register', {nav, pageDetails});
+        return result(200);
     } catch (error) {
         pageDetails.error = "Oops something went wrong, try again";
-        return res.status(500).render('register', {nav, pageDetails});
+        return result(500);
     }
 
 });
