@@ -22,7 +22,7 @@ const postUsers = router.post('/', async (req, res)=>{
     const { error } = validate(req.body);
     if(error) { 
     pageDetails.error = error.details[0].message;
-    return res.render('register', { nav, pageDetails }); }
+    return res.status(400).render('register', { nav, pageDetails }); }
 
     //return if password and confirmation does not match
     if(req.body.password !== req.body.password_confirmation) {
