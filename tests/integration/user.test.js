@@ -16,16 +16,62 @@ describe('Describe users', ()=> {
 
     describe('Create users post', ()=>{
 
-        it('it should return error 400 if all fields are not filled', async ()=>{
-            let user = {
-                name: "user name",
-                email:  "email@email.com",
-                phone: "12345678901"
-            };
+        let user ;
+        beforeEach(()=> {
+       user = { name: "user name", email:  "email@email.com", 
+                    phone: "12345678901", password :'password', password_confirmation: 'password' };
+        });
 
-            const result = await request(server).post('/users').send(user);
+        const exec = async () => {
+            return await request(server).post('/users').send(user);
+        }
+
+        it('it should return error 400 if all fields are not filled', async ()=>{
+           user.password = undefined;
+            const result = await exec();
             expect(result.status).toBe(400);
-        })
+        });
+        it('should return error 400 if name of user is less than 4 characters', async ()=>{
+            user.name = '123';
+
+            const result = await exec();
+            expect(result.status).toBe(400);
+
+        });
+       it('should return error 400 if password is less than 6 characters', async ()=> {
+            user.password = '12345';
+
+            const result = await exec();
+            expect(result.status).toBe(400);
+       });
+
+       it('should return error 409 if given email already exist', async ()=>{
+           const newUser = new User({
+                name: 'New User',  email : 'email@email.com',
+                phone: '1234567827234', password: 'password' });
+           await newUser.save();
+
+           const result = await exec();
+           expect(result.status).toBe(409);
+       });
+
+       it('should return error 409 if given phone already exist', async ()=>{
+        const newUser = new User({
+             name: 'New User',  email : 'email@email.com',
+             phone: '1234567827234', password: 'password' });
+        await newUser.save();
+
+        user.phone = '1234567827234';
+
+        const result = await exec();
+        expect(result.status).toBe(409);
+    });
+
+    it('should return 200 if request is valid', async ()=>{
+        
+        const result = await exec();
+        expect(result.status).toBe(200);
+    });
 
     });
 

@@ -27,25 +27,25 @@ const postUsers = router.post('/', async (req, res)=>{
     //return if password and confirmation does not match
     if(req.body.password !== req.body.password_confirmation) {
         pageDetails.error = "Password confirmation does not match";
-        return res.render('register', {nav, pageDetails});
+        return res.status(400).render('register', {nav, pageDetails});
     }
 
     //return if user name or email or phone exists
     const userName = await User.findOne({'name': req.body.name});
     if(userName){
         pageDetails.error = "User already registered";
-        return res.render('register', { nav, pageDetails});
+        return res.status(409).render('register', { nav, pageDetails});
     }
 
     const userMail = await User.findOne({'email' :req.body.email});
     if(userMail) {
         pageDetails.error = "User already exist with given mail";
-        return res.render('register', { nav, pageDetails }); }
+        return res.status(409).render('register', { nav, pageDetails }); }
 
     const userPhone = await User.findOne({'phone':req.body.phone});
     if(userPhone) {
         pageDetails.error = "User already exist with given phone number";
-        return res.render('register', { nav,  pageDetails });  }
+        return res.status(409).render('register', { nav,  pageDetails });  }
 
     //create a new user
     const newUser = new User({
@@ -56,14 +56,12 @@ const postUsers = router.post('/', async (req, res)=>{
     });
     try {
         await newUser.save();
-        
+        return res.status(200).render('register', {nav, pageDetails});
     } catch (error) {
         pageDetails.error = "Oops something went wrong, try again";
-        return res.render('register', {nav, pageDetails});
+        return res.status(500).render('register', {nav, pageDetails});
     }
 
-    //need to redirect with a message
-    res.redirect('/');
 });
 
 return [getUsers, postUsers];
