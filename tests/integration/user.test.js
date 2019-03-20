@@ -78,7 +78,16 @@ describe('Describe users', ()=> {
         
         const result = await exec();
         expect(result.status).toBe(200);
+        // expect(result.body).toHaveProperty('name', user.name);
+        // expect(result.body).toHaveProperty('email', user.email);
+        // expect(result.body).toHaveProperty('phone', user.phone);
     });
+     it('should return error 400 if password is less than 6 characters', async ()=> {
+        user.password = user.password_confirmation = 'passw';
+
+        const result = await exec();
+        expect(result.status).toBe(400);
+     });
 
     });
 

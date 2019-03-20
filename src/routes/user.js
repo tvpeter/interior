@@ -27,7 +27,6 @@ const postUsers = router.post('/', async (req, res)=>{
     return result(400);
     }
 
-
     //return if password and confirmation does not match
     if(req.body.password !== req.body.password_confirmation) {
         pageDetails.error = "Password confirmation does not match";
