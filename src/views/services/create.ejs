@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<% include ../partials/header %>
+     
+    
+    <!--FAQs Section-->
+    <section class="faqs-section">
+    	<div class="auto-container">
+            
+            <div class="sec-title medium">
+            	<h2>Create Service</h2>
+            </div>
+            
+            <div class="ask-questions">
+            <% if(pageDetails.error) {%>
+            <%= pageDetails.error %>
+            <%}%>
+           
+                <div class="form-box default-form">
+                    <div class="contact-form default-form">
+                        <form method="post" action="/services/create">
+                            <div class="row clearfix">
+                            
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" name="title" placeholder="Service Title" required>
+                                </div>
+    
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                     <textarea name="description" placeholder="Service Description" required></textarea>
+                                </div>
+                                
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <button type="submit" class="theme-btn btn-style-two">Submit Now</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+                        
+        </div>
+    </section>
+    
+    
+    <% include ../partials/footer %>
+    
+</div>
+<!--End pagewrapper-->
+
+
+<!--Search Popup-->
+<div id="search-popup" class="search-popup">
+	<div class="close-search theme-btn"><span class="flaticon-unchecked"></span></div>
+	<div class="popup-inner">
+    
+    	<div class="search-form">
+        	<form method="post" action="http://world5.commonsupport.com/html2/decorators/index.html">
+            	<div class="form-group">
+                	<fieldset>
+                        <input type="search" class="form-control" name="search-input" value="" placeholder="Search Here" required >
+                        <input type="submit" value="Search" class="theme-btn">
+                    </fieldset>
+                </div>
+            </form>
+            
+            <br>
+            <h3>Recent Search Keywords</h3>
+            <ul class="recent-searches">
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Web Development</a></li>
+                <li><a href="#">SEO</a></li>
+                <li><a href="#">Logistics</a></li>
+                <li><a href="#">Freedom</a></li>
+            </ul>
+        
+        </div>
+        
+    </div>
+</div>
+
+<!--Scroll to top-->
+<div class="scroll-to-top scroll-to-target" data-target=".main-header"><span class="fa fa-long-arrow-up"></span></div>
+
+
+<script src="js/jquery.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/jquery.fancybox.pack.js"></script>
+<script src="js/jquery.fancybox-media.js"></script>
+<script src="js/owl.js"></script>
+<script src="js/wow.js"></script>
+<script src="js/script.js"></script>
+</body>
+
+</html>
