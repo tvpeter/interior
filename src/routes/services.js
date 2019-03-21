@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {Service, validate} = require('../models/services');
 
-let pageDetails = {
+ pageDetails = {
     current : "Services",
     title : "FMG Furniture | Services",
     header : "Our Services"
@@ -23,9 +23,8 @@ const getServiceForm = router.get('/create', (req, res) => {
 });
 
 const createService = router.post('/create', async (req, res) => {
+    
     //validate the post that it contains all params
-     
-
     const { error } = validate(req.body);
     if(error) {
         pageDetails.error = error.details[0].message;
