@@ -7,7 +7,6 @@ let pageDetails = {
         title : "Register User",
         header : "Register User"
 }
-
 function userRouter (nav){
 const getUsers = router.get('/', (req, res)=>{
     res.render('register', {
