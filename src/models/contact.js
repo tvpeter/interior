@@ -14,7 +14,8 @@ function validateContact (contact) {
 
     const schema = {
         address: Joi.string().min(10).required(),
-        phone: Joi.number().min(11).max(15).required(),
+        phone: Joi.string().min(11).max(15).required(),
+        secondline:Joi.string().min(11).max(15),
         email: Joi.string().email({minDomainAtoms: 2}).required()
     }
     return Joi.validate(contact, schema);
