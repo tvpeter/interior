@@ -35,18 +35,15 @@ const about = require('./src/routes/about')(nav);
 const services = require('./src/routes/services')(nav);
 const contact = require('./src/routes/contact')(nav);
 const products = require('./src/routes/products')(nav);
+const index = require('./src/routes/index')(nav);
 
 app.use('/users', users);
 app.use('/about', about);
 app.use('/services', services);
 app.use('/contact', contact);
 app.use('/products', products);
+app.use('/', index);
 
-app.get('/', (req, res)=> {
-    pageDetails.current = "Home";
-    pageDetails.title = "FMG Furniture | Homepage";
-    res.render('index', {nav, pageDetails});
-});
 
 app.get('/products/details', (req, res)=>{
     res.render('details', {
