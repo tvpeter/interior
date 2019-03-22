@@ -9,10 +9,12 @@ const {Service, validate} = require('../models/services');
 }
 
 function servicesRouter(nav){
- const getServices = router.get('/', (req, res)=> {
-    res.render('services', {
+ const getServices = router.get('/', async (req, res)=> {
+    const services = await Service.find({});
+    res.status(200).render('services', {
         nav,
-        pageDetails
+        pageDetails,
+        services
     });
 });
 
