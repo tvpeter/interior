@@ -28,14 +28,21 @@ function contactRouter(nav){
         }
 
         //check that it's not in the db
-        const contact = await Contact.find({'address': req.body.address});
-        const address = await Contact.find({'phone': req.body.phone});
-        const email = await Contact.find({'email': req.body.email});
+        const contact = await Contact.findOne({'address': req.body.address});
+        
+        // if(contact) {
+        //     pageDetails.error = "contact already created";
+        //     return res.status(400).render('contact/create', { nav, pageDetails })
+        // }
 
-        if(contact || address || email) {
+        //const phone = await Contact.find({'phone': {req.body.phone, req.body.secondline}});
+
+        const email = await Contact.findOne({'email': req.body.email});
+        if(contact || email) {
             pageDetails.error = "contact already created";
             return res.status(400).render('contact/create', { nav, pageDetails })
         }
+
         
         // create and save the contact
         const newContact = new Contact ({
