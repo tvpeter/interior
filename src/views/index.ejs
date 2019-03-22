@@ -215,15 +215,14 @@
             <!--sec-title-->
             <div class="sec-title clearfix">
                 <h2 class="pull-left">Our Services</h2>
-                <a class="service-link pull-right" href="services.html">More Services <span class="fa fa-caret-right"></span></a>
+                <a class="service-link pull-right" href="/services">More Services <span class="fa fa-caret-right"></span></a>
             </div>
             
         	<div class="row clearfix">
             
-               
+               <% for(let service of services) { %>
                 
                 <div class="service-block-two col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                	<!--inner-box-->
                 	<div class="inner-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
                     	<div class="image-layer"></div>
                     
@@ -231,63 +230,17 @@
                         	<span class="flaticon-parquet"></span>
                         </div>
                         
-                        <h3>Flooring</h3>
-                        <div class="text"> Flooring has a tremendous impact on the appearance and finishing of your project. Good looking flooring will enhance the value of the home and office. However, not all builders or decorators know the right flooring for your project. We at FMG Furniture are specialists in flooring. Contact us today.</div>
-                        <a href="#" class="read-more">Read More</a>
+                        <h3><%= service.title %></h3>
+                        <div class="text"> <%= service.description %></div>
+                        <a href="/services" class="read-more">Read More</a>
                         
-                        <!--bottom-icon-->
                         <div class="bottom-icon">
                         	<span class="flaticon-parquet"></span>
                         </div>
                         
                     </div>
                 </div>
-                
-                <div class="service-block-two col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                	<!--inner-box-->
-                	<div class="inner-box wow fadeIn" data-wow-delay="800ms" data-wow-duration="1500ms">
-                    	<div class="image-layer"></div>
-                    	<!--icon-box-->
-                    	<div class="icon-box">
-                        	<span class="flaticon-window"></span>
-                        </div>
-                        
-                        <h3>Interior Curtains</h3>
-                        <div class="text">Guess you know that, curtains make a room - only when chosen correctly. With the right fabric and color, correctly lined, we give your place, occassion and ceremony the most befitting look and feel. We will bring our years of experience and creativity will give you that unique decoration. Contact us today.
-                        </div>
-                        <a href="#" class="read-more">Read More</a>
-                    
-                        <div class="bottom-icon">
-                        	<span class="flaticon-window"></span>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                
-                
-                <div class="service-block-two col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                	<!--inner-box-->
-                	<div class="inner-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
-                    	<div class="image-layer"></div>
-                    	<!--icon-box-->
-                    	<div class="icon-box">
-                        	<span class="flaticon-two"></span>
-                        </div>
-                        
-                        <h3>Furniture Work</h3>
-                        <div class="text">Whether you know  quality and fitting furniture for your home or office, or you need support in making it a befiting, we are always at your service. We are committed to satisfying you. We are here to serve you right. </div>
-                        <a href="#" class="read-more">Read More</a>
-                        
-                        <!--bottom-icon-->
-                        <div class="bottom-icon">
-                        	<span class="flaticon-dinner"></span>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                
+                <% } %>
                 
                 
             </div>
