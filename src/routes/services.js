@@ -11,7 +11,7 @@ const {Service, validate} = require('../models/services');
 function servicesRouter(nav){
  const getServices = router.get('/', async (req, res)=> {
     const services = await Service.find({});
-    res.status(200).render('services', {
+    res.status(200).render('services/services', {
         nav,
         pageDetails,
         services
