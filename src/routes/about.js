@@ -28,6 +28,10 @@ const qualitiesForm = router.get('/create', async(req, res)=>{
     })
 });
 
+// const createQuality = router.post('/create', async(req, res)=>{
+
+// });
+
 return [aboutIndex, qualitiesForm];
 
 }
