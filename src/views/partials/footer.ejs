@@ -23,7 +23,7 @@
                             	<div class="footer-widget about-widget">
                                     <div class="widget-content">
                                         <ul class="contact-info">
-                                        	<li><span class="icon fa fa-map-marker"></span>Line Immigration, Farouk's Road, Tarauni Kano</li>
+                                        	<li><span class="icon fa fa-map-marker"></span><%= contacts.address %></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -40,7 +40,8 @@
                             	<div class="footer-widget about-widget">
                                     <div class="widget-content">
                                         <ul class="contact-info">
-                                            <li><span class="icon fa fa-phone"></span>+234 7032 763364, +2348022443561 </li>
+                                            <li><span class="icon fa fa-phone"></span><% for(let phone of contacts.phone ) {%>
+                                            <%= phone %> <% } %>      </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -50,7 +51,9 @@
                             	<div class="footer-widget about-widget">
                                     <div class="widget-content">
                                         <ul class="contact-info">
-                                            <li><span class="icon fa fa-envelope-o"></span>contact@fmgfurniture.com</li>
+                                            <li><span class="icon fa fa-envelope-o"></span>
+                                                <%= contacts.email %>                        
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

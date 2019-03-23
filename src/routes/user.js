@@ -7,11 +7,11 @@ pageDetails = {
         title : "Register User",
         header : "Register User"
 }
-function userRouter (nav){
+function userRouter (nav, contactDetails){
 const getUsers = router.get('/', (req, res)=>{
     res.render('register', {
         nav, 
-        pageDetails
+        pageDetails, contactDetails
     });
 });
 

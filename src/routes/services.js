@@ -1,20 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const {Service, validate} = require('../models/services');
+const {Contact } = require('../models/contact');
 
- pageDetails = {
+ let pageDetails = {
     current : "Services",
     title : "FMG Furniture | Services",
     header : "Our Services"
 }
 
-function servicesRouter(nav){
+function servicesRouter(nav, contactDetails){
  const getServices = router.get('/', async (req, res)=> {
     const services = await Service.find({});
+    let contacts = await Contact.find({}, {address:1, email:1, phone:1, _id:0});
+    contacts = contacts[0];
     res.status(200).render('services/services', {
         nav,
         pageDetails,
-        services
+        services,
+        contacts
     });
 });
 
@@ -37,7 +41,7 @@ const createService = router.post('/create', async (req, res) => {
     const service = await Service.findOne({'title':req.body.title});
     if(service) {
         pageDetails.error = "Service already created";
-        return res.status(409).render('services/create', {nav, pageDetails});
+        return res.status(409).render('services/create', {nav, pageDetails, contactDetails});
     }
 
     //create a new service
@@ -47,10 +51,10 @@ const createService = router.post('/create', async (req, res) => {
     });
     try {
         await newService.save();
-        return res.status(200).render('services/create', {nav, pageDetails});
+        return res.status(200).render('services/create', {nav, pageDetails, contactDetails});
     } catch (error) {
         pageDetails.error = error;
-        return res.status(400).render('services/create', {nav, pageDetails});
+        return res.status(400).render('services/create', {nav, pageDetails, contactDetails});
     }
 });
 

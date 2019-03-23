@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-
 const app = express();
 
 app.set('views', './src/views/');
@@ -10,6 +9,7 @@ app.use('/css', express.static(path.join(__dirname, 'public/css/')));
 app.use('/js', express.static(path.join(__dirname, 'public/js/')));
 app.use('/images', express.static(path.join(__dirname, 'public/images/')));
 const port = process.env.PORT || 3000;
+
 
 require('./startup/db')();
 
@@ -29,7 +29,7 @@ let pageDetails = {
     header: "",
     error: ""
 }
-
+ 
 const users = require('./src/routes/user')(nav);
 const about = require('./src/routes/about')(nav);
 const services = require('./src/routes/services')(nav);
@@ -45,7 +45,7 @@ app.use('/products', products);
 app.use('/', index);
 
 
-app.get('/products/details', (req, res)=>{
+app.get('/products/details', async (req, res)=>{
     res.render('details', {
         nav,
         current: "Products",

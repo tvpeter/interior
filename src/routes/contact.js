@@ -10,13 +10,16 @@ let pageDetails = {
 
 
 function contactRouter(nav){
-
+   
     const contactIndex = router.get('/', async (req, res)=> {
-        res.render('contact/contact', { nav, pageDetails });
+        let contacts = await Contact.find({}, {email:1, phone:1, address:1, _id:0});
+        contacts = contacts[0];
+    
+        res.render('contact/contact', { nav, pageDetails, contacts });
     });
 
     const contactForm = router.get('/create', (req, res)=> {
-        res.render('contact/create', {nav, pageDetails});
+        res.render('contact/create', {nav, pageDetails, contactDetails});
     });
 
     const createContact = router.post('/create', async (req, res)=>{
@@ -24,23 +27,18 @@ function contactRouter(nav){
         const {error} = validate(req.body)
         if(error) {
             pageDetails.error = error.details[0].message;
-            return res.status(400).render('contact/create', { nav, pageDetails });
+            return res.status(400).render('contact/create', { nav, pageDetails, contactDetails });
         }
 
         //check that it's not in the db
         const contact = await Contact.findOne({'address': req.body.address});
         
-        // if(contact) {
-        //     pageDetails.error = "contact already created";
-        //     return res.status(400).render('contact/create', { nav, pageDetails })
-        // }
-
-        //const phone = await Contact.find({'phone': {req.body.phone, req.body.secondline}});
+        const phone = await Contact.find({'phone': {$elemMatch: {$eq: req.body.phone }}});
 
         const email = await Contact.findOne({'email': req.body.email});
-        if(contact || email) {
+        if(contact || email || phone) {
             pageDetails.error = "contact already created";
-            return res.status(400).render('contact/create', { nav, pageDetails })
+            return res.status(400).render('contact/create', { nav, pageDetails, contactDetails })
         }
 
         
@@ -53,15 +51,16 @@ function contactRouter(nav){
 
         try {
             await newContact.save();
-            return res.status(200).render('contact/create', { nav, pageDetails });
+            return res.status(200).render('contact/create', { nav, pageDetails, contactDetails });
         } catch (error) {
             pageDetails.error = error;
-            return res.status(500).render('contact/create', { nav, pageDetails});
+            return res.status(500).render('contact/create', { nav, pageDetails, contactDetails});
         }
 
     });
 
     return [ contactIndex, contactForm, createContact];
 }
+ 
 
 module.exports = contactRouter;

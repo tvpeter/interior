@@ -33,8 +33,10 @@
                             </div>
                             
                             <ul>
-                                <li><span class="fa fa-envelope-o"></span>contact@fmgfurniture.com</li>
-                                <li><span class="fa fa-phone"></span>Mobile: +234 7032 763364, +2348022443561</li>
+                                <li><span class="fa fa-envelope-o"></span><%= contacts.email %></li>
+                                <li><span class="fa fa-phone"></span>Mobile: <% for(let phone of contacts.phone){ %>
+                                    <%= phone %> <% } %>
+                                </li>
                                 <li><span class="fa fa-clock-o"></span>Mon - Sat : 8:00am -6:00pm</li>
                             </ul>
                             

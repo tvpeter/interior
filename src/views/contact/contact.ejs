@@ -68,9 +68,10 @@
                 	<div class="sec-title medium"><h2>Contact Details</h2></div>
                     <div class="info-style-one">
                         <ul>
-                            <li><div class="icon-box"><span class="flaticon-international-delivery"></span></div><h4>Address :</h4><div class="text">Line Immigration, Farouk's Road, <br>Tarauni Kano</div></li>
-                            <li><div class="icon-box"><span class="flaticon-envelope"></span></div><h4>Mail:</h4><div class="text">contact@fmgfurniture.com</div></li>
-                            <li><div class="icon-box"><span class="flaticon-phone-call"></span></div><h4>Call:</h4><div class="text"> (+234) 7032 63364</div></li>
+                            <li><div class="icon-box"><span class="flaticon-international-delivery"></span></div><h4>Address :</h4><div class="text"><%= contacts.address %></div></li>
+                            <li><div class="icon-box"><span class="flaticon-envelope"></span></div><h4>Mail:</h4><div class="text"><%= contacts.email %></div></li>
+                            <li><div class="icon-box"><span class="flaticon-phone-call"></span></div><h4>Call:</h4><div class="text"><% for(let phone of contacts.phone ) {%>
+                            <%= phone %> <% } %>     </div></li>
                         </ul>
                     </div>
                 </div>
