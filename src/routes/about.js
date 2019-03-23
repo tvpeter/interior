@@ -10,14 +10,26 @@ let pageDetails = {
 
 
 function aboutRouter(nav) {
-return router.get('/', async (req, res)=>{
+const aboutIndex = router.get('/', async (req, res)=>{
     let contacts = await Contact.find({}, {address:1, email:1, phone:1, _id:0});
     contacts = contacts[0];
-    res.render('about', {
+    res.render('about/about', {
         nav,
         pageDetails, contacts
     });
 });
+
+const qualitiesForm = router.get('/create', async(req, res)=>{
+    let contacts = await Contact.find({}, {address:1, email:1, phone:1, _id:0});
+    contacts = contacts[0];
+    res.status(200).render('about/qualities', {
+        nav,
+        pageDetails, contacts
+    })
+});
+
+return [aboutIndex, qualitiesForm];
+
 }
 
 module.exports = aboutRouter;
