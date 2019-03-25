@@ -14,9 +14,10 @@ function aboutRouter(nav) {
 const aboutIndex = router.get('/', async (req, res)=>{
     let contacts = await Contact.find({}, {address:1, email:1, phone:1, _id:0});
     contacts = contacts[0];
+    qualities = await Quality.find({});
     res.render('about/about', {
         nav,
-        pageDetails, contacts
+        pageDetails, contacts, qualities
     });
 });
 
@@ -40,7 +41,7 @@ const createQuality = router.post('/create', async(req, res)=>{
     }
 
     //check the db that it is not already created
-    const qualityInDb = await Quality.find({'title':req.body.title});
+    const qualityInDb = await Quality.findOne({'title':req.body.title});
 
     if(qualityInDb){
         pageDetails.error = "Quality already listed";

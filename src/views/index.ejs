@@ -167,40 +167,19 @@
                 
                 <!--service-column-->
                 <div class="col-md-6 col-sm-12 col-xs-12 service-column">
-                	<!--service-block-one-->
+                    <!--service-block-one-->
+                    <% for (let quality of qualities) { %>
                 	<div class="service-block-one">
                     	<div class="inner-box">
                             <!--icon-block-->
                             <div class="icon-box">
                                 <span class="flaticon-avatar-1"></span>
                             </div>
-                            <h3>We are Professionals</h3>
-                           <div class="text">We deliver with precision, efficiency and mastery.</div>
+                            <h3><%= quality.title %></h3>
+                           <div class="text"><%= quality.description %></div>
                         </div>
                     </div>
-                    <!--service-block-one-->
-                    <div class="service-block-one">
-                    	<div class="inner-box">
-                            <!--icon-block-->
-                            <div class="icon-box">
-                                <span class="flaticon-correct"></span>
-                            </div>
-                            <h3>We are Trusted</h3>
-                           
-                            <div class="text">We are reliable. We understand that trust in instrumental and on daily basis, we are committed to winning your trust.</div>
-                        </div>
-                    </div>
-                    <!--service-block-one-->
-                    <div class="service-block-one">
-                    	<div class="inner-box">
-                            <!--icon-block-->
-                            <div class="icon-box">
-                                <span class="flaticon-compass"></span>
-                            </div>
-                            <h3>We are Expert</h3>
-                             <div class="text">With layers of experience in the industry serving a vast number of clients, we have redefined expertise.</div>
-                        </div>
-                    </div>
+                    <% } %>
                     
                 </div>
             </div>
