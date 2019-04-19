@@ -8,6 +8,13 @@ const qualitySchema = new mongoose.Schema({
 
 const Quality = mongoose.model('Quality', qualitySchema);
 
+const aboutusSchema = new mongoose.Schema({
+    description: { type:String, required: true, minlength: 100},
+    aboutimg:{ data:Buffer, contentType: String }
+});
+
+const AboutUs = mongoose.model('AboutUs', aboutusSchema);
+
 function validateQuality(quality){
     const schema = {
         title: Joi.string().min(5).max(60).trim().required(),
@@ -16,5 +23,13 @@ function validateQuality(quality){
     return Joi.validate(quality, schema);
 }
 
+function validateAboutUs(){
+    const schema = {
+        description: Joi.string().min(100).required(),
+    }
+}
+
 exports.Quality = Quality;
-exports.validate = validateQuality;
+exports.AboutUs = AboutUs;
+exports.validateQuality = validateQuality;
+exports.validateAboutUs = validateAboutUs;
