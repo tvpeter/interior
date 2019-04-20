@@ -1,60 +1,50 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
 const app = express();
 
-app.set('views', './src/views/');
-app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'public/')));
-app.use('/css', express.static(path.join(__dirname, 'public/css/')));
-app.use('/js', express.static(path.join(__dirname, 'public/js/')));
-app.use('/images', express.static(path.join(__dirname, 'public/images/')));
+app.set("views", "./src/views/");
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "public/")));
+app.use("/css", express.static(path.join(__dirname, "public/css/")));
+app.use("/js", express.static(path.join(__dirname, "public/js/")));
+app.use("/images", express.static(path.join(__dirname, "public/images/")));
 const port = process.env.PORT || 3000;
 
-
-require('./startup/db')();
+require("./startup/db")();
 
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
-const nav = [ 
-    { link : '/', title : 'Home'},
-    { link : '/about', title: 'About Us'},
-    { link : '/services', title: 'Services'},
-    { link : '/products', title: 'Products'},
-    { link : '/contact', title: 'Contact'},
+const nav = [
+  { link: "/", title: "Home" },
+  { link: "/about", title: "About Us" },
+  { link: "/services", title: "Services" },
+  { link: "/products", title: "Products" },
+  { link: "/contact", title: "Contact" }
 ];
 let pageDetails = {
-    current: "",
-    title: "",
-    header: "",
-    error: ""
-}
- 
-const users = require('./src/routes/user')(nav);
-const about = require('./src/routes/about')(nav);
-const services = require('./src/routes/services')(nav);
-const contact = require('./src/routes/contact')(nav);
-const products = require('./src/routes/products')(nav);
-const index = require('./src/routes/index')(nav);
+  current: "",
+  title: "",
+  header: "",
+  error: ""
+};
 
-app.use('/users', users);
-app.use('/about', about);
-app.use('/services', services);
-app.use('/contact', contact);
-app.use('/products', products);
-app.use('/', index);
+const users = require("./src/routes/user")(nav);
+const about = require("./src/routes/about")(nav);
+const services = require("./src/routes/services")(nav);
+const contact = require("./src/routes/contact")(nav);
+const products = require("./src/routes/products")(nav);
+const index = require("./src/routes/index")(nav);
 
+app.use("/users", users);
+app.use("/about", about);
+app.use("/services", services);
+app.use("/contact", contact);
+app.use("/products", products);
+app.use("/", index);
 
-app.get('/products/details', async (req, res)=>{
-    res.render('details', {
-        nav,
-        current: "Products",
-        title : "FMG Furniture | Products",
-        header: "Product Details"
-    });
+const server = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
-
-
-const server = app.listen(port, ()=>{ console.log(`Listening on port ${port}`)})
 
 module.exports = server;
