@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 
-<% include ./partials/header %>    
+<% include ./partials/adminheader %>    
     
     <section class="register-section">
         <div class="auto-container">
             <div class="row clearfix">
+                    <% include ./partials/aside %>
                 
-                <div class="text-center form-column column col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
+                <div class="column form-column  col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1">
                 
                     <div class="sec-title medium">
-                        <h2><%= pageDetails.header %></h2>
+                        <h2><%= headers.header %></h2>
                     </div>
                     <% if(pageDetails.error) {%>
                     <%= pageDetails.error %>
@@ -54,9 +55,7 @@
         </div>
     </section>
       
-    
-   <% include ./partials/footer %> 
-    
+   <% include ./partials/adminfooter %>
 </div>
 
 <!--Scroll to top-->
