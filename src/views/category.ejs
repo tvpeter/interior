@@ -8,40 +8,22 @@
             <div class="row clearfix">
                     <% include ./partials/aside %>
                 
-                <div class="column form-column  col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1">
+                <div class="column form-column  col-lg-5 col-md-5 col-sm-12 col-xs-12">
                 
                     <div class="sec-title medium">
                         <h2><%= headers.header %></h2>
                     </div>
-                    <% if(pageDetails.error) {%>
-                    <%= pageDetails.error %>
-                    <%}%>
+                    <% if(headers.error) {%>
+                    <%= headers.error %>
+                    <% } %>
                     <div class="styled-form login-form">
-                        <form method="post" action="/users" name="form1">
+                        <form method="post" action="/category" name="form1">
                             <div class="form-group">
-                                <span class="adon-icon"><span class="fa fa-user"></span></span>
-                                <input type="text" name="name" required placeholder="Your Name *">
+                                <input type="text" name="name" required placeholder="Category Name *">
                             </div>
-                            <div class="form-group">
-                                <span class="adon-icon"><span class="fa fa-envelope-o"></span></span>
-                                <input type="email" name="email" placeholder="Enter email" required>
-                            </div>
-                            <div class="form-group">
-                            <span class="adon-icon"><span class="fa fa-phone"></span></span>
-                            <input type="text" name="phone" placeholder="Phone number" required>
-                        </div>
-                            <div class="form-group">
-                                <span class="adon-icon"><span class="fa fa-unlock-alt"></span></span>
-                                <input type="password" name="password" placeholder="Enter Password" required>
-                            </div>
-
-                            <div class="form-group">
-                            <span class="adon-icon"><span class="fa fa-unlock-alt"></span></span>
-                            <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
-                        </div>
                         <div class="clearfix">
                                 <div class="form-group pull-left">
-                                    <button type="submit" class="theme-btn btn-style-two">Register</button>
+                                    <button type="submit" class="theme-btn btn-style-two">Create</button>
                                 </div>
                             </div>
                             
@@ -50,6 +32,27 @@
                     
                 </div>
                 
+                <div class="sidebar-side col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <aside class="sidebar">
+                            
+                            <div class="widget popular-categories sidebar-widget">
+                                <div class="sidebar-title"><h3>Product Categories</h3></div>
+                                
+                                <ul class="list-three">
+                                <% for (const category of categories) { %>
+                                    <form method="post" action="/category?_method=DELETE" id="form_">
+                                    <input type="hidden" name="_id" value="<% category._id %>">
+                                    <li><a href="" title="Delete"><%= category.name %> &nbsp;
+                                        <button type="submit" class="fa fa-trash"></button>
+                                    </a></li>
+                                    </form>
+                                    <% }%>
+                                </ul>
+                                
+                            </div>
+                            
+                        </aside>
+                    </div>
                 
             </div>
         </div>
