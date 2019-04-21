@@ -307,29 +307,16 @@
                                         <button type="submit"><span class="icon fa fa-search"></span></button>
                                     </div>
                                 </form>
-                                
                             </div>
                             
-                            <!-- Popular Categories -->
                             <div class="widget popular-categories sidebar-widget">
-                                <div class="sidebar-title"><h3>Product Categories</h3></div>
-                                
+                                <div class="sidebar-title"><h3>Categories</h3></div>
                                 <ul class="list-three">
-                                    <li><a href="#">Gardern Lights (15)</a></li>
-                                    <li><a href="#">Kitchen &amp; Dining (22)</a></li>
-                                    <li><a href="#">Fabric &amp; Wooden Sofa (20)</a></li>
-                                    <li><a href="#">Living Room Storage (10) </a></li>
-                                    <li><a href="#">Carpets &amp; Doormats (05) </a></li>
+                                    <% categories.forEach(category => { %>
+                                    <li><a href="#"><%= category.name %></a></li>
+                                    <% }); %>
                                 </ul>
-                                
                             </div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
                         </aside>
                     </div><!--End Sidebar-->      
                       
