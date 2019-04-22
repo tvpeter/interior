@@ -41,7 +41,7 @@ const categoryRouter = nav => {
     try {
       await newCategory.save();
       //return res.status(200).render("category", { nav, headers, categories });
-      return res.redirect("/category");
+      return res.status(200).redirect("/category");
     } catch (error) {
       headers.error = error;
       res.status(500).render("category", {

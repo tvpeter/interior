@@ -10,8 +10,8 @@ const productSchema = new mongoose.Schema({
     trim: true
   },
   price: { type: Number },
-  category: { type: Array, required: true },
-  description: { type: String, minlength: 15, maxlength: 250 },
+  category: [String],
+  description: { type: String, minlength: 15, maxlength: 250, required: true },
   img: { data: Buffer, contentType: String }
 });
 
@@ -25,9 +25,16 @@ const validateProduct = product => {
       .max(60)
       .required(),
     price: Joi.number(),
-    category: Joi.array().items(Joi.string())
+    category1: Joi.string().required(),
+    category2: Joi.string(),
+    description: Joi.string()
+      .min(15)
+      .max(250)
+      .trim()
+      .required()
   };
+  return Joi.validate(product, schema);
 };
 
 exports.Product = Product;
-exports.validateProduct = validate;
+exports.validate = validateProduct;

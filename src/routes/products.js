@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const fs = require("fs");
 const { Contact } = require("../models/contact");
 const { Category } = require("../models/category");
+const { Product, validate } = require("../models/products");
+const multer = require("multer");
+
+const upload = multer({ dest: "./public/images/test/" });
 
 let pageDetails = {
   current: "Products",
@@ -32,14 +37,66 @@ function productsRouter(nav) {
     );
     contacts = contacts[0];
     const categories = await Category.find({}, { name: 1, _id: 0 });
-    res.render("products", {
+    res.render("products/products", {
       nav,
       pageDetails,
       contacts,
       categories
     });
   });
-  return [productIndex, productDetails];
+  const showCreateForm = router.get("/create", async (req, res) => {
+    const categories = await Category.find({}, { name: 1, _id: 0 });
+    pageDetails.header = "Create Product";
+    res.render("products/create", { pageDetails, nav, categories });
+  });
+  const createProduct = router.post(
+    "/create",
+    upload.single("img"),
+    async (req, res) => {
+      const categories = await Category.find({}, { name: 1, _id: 0 });
+      //check if category1 and category2 are same
+
+      if (req.body.category1 === req.body.category2) {
+        pageDetails.error = "selected categories are same";
+        return res.status(400).redirect("/products/create");
+      }
+
+      //check that the req is complete
+      const { error } = validate(req.body);
+      if (error) {
+        pageDetails.error = error.details[0].message;
+        return res.status(400).redirect("/products/create");
+      }
+
+      //check db for the item
+      const dbProduct = await Product.findOne({ name: req.body.name });
+      //const dbProductImg = await Product.findOne({'img': req.file.originalname});
+
+      if (dbProduct) {
+        pageDetails.error = "Product already created";
+        return res.status(400).redirect("/products/create");
+      }
+      //create the item
+      const newProduct = new Product({
+        name: req.body.name,
+        price: req.body.price,
+        category: [req.body.category1, req.body.category2],
+        description: req.body.description
+      });
+      newProduct.img.data = fs.readFileSync(req.file.path);
+      newProduct.img.contentType = "image/png";
+
+      try {
+        await newProduct.save();
+        pageDetails.error = "successfully saved";
+        return res.status(200).redirect("/products/create");
+      } catch (error) {
+        pageDetails.error = error;
+        return res.status(409).redirect("/products/create");
+      }
+    }
+  );
+  return [showCreateForm, productIndex, productDetails, createProduct];
 }
 
 module.exports = productsRouter;
