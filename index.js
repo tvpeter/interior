@@ -1,6 +1,7 @@
 const express = require("express");
 const methodOverride = require("method-override");
 const path = require("path");
+//const multer = require("multer");
 const app = express();
 
 // override with POST having ?_method=DELETE
@@ -11,6 +12,15 @@ app.use(express.static(path.join(__dirname, "public/")));
 app.use("/css", express.static(path.join(__dirname, "public/css/")));
 app.use("/js", express.static(path.join(__dirname, "public/js/")));
 app.use("/images", express.static(path.join(__dirname, "public/images/")));
+
+// app.use(
+//   multer({
+//     dest: "./public/images/test/",
+//     rename: function(fieldname, filename) {
+//       return filename;
+//     }
+//   })
+// );
 const port = process.env.PORT || 3000;
 
 require("./startup/db")();
