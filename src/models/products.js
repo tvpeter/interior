@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema({
     maxlength: 60,
     trim: true
   },
+  qty: { type: Number, required: true, min: 1 },
   price: { type: Number },
   category: [String],
   description: { type: String, minlength: 15, maxlength: 250, required: true },
@@ -31,6 +32,9 @@ const validateProduct = product => {
       .min(15)
       .max(250)
       .trim()
+      .required(),
+    qty: Joi.number()
+      .min(1)
       .required()
   };
   return Joi.validate(product, schema);

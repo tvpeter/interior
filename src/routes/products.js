@@ -89,17 +89,17 @@ function productsRouter(nav) {
         name: req.body.name,
         price: req.body.price,
         category: [req.body.category1, req.body.category2],
-        description: req.body.description
+        description: req.body.description,
+        qty: req.body.qty
       });
       //base 64 encoding of images
-      //worthy of note is that, before encoding, image size was 16kb, after encoding size is 50kb
-      //need to check for output of these before finalizing
-      newProduct.img.data = fs.readFileSync(req.file.path).toString("base64"); //yields 16kb
+      //need to check for output of these before finalizing cos different binary encoding with same size
+      //newProduct.img.data = fs.readFileSync(req.file.path).toString("base64");
 
-      // newProduct.img.data = Buffer(
-      //   fs.readFileSync(req.file.path).toString("base64"),
-      //   "base64"
-      // );//yields 50kb
+      newProduct.img.data = Buffer(
+        fs.readFileSync(req.file.path).toString("base64"),
+        "base64"
+      );
       newProduct.img.contentType = req.file.mimetype;
       try {
         await newProduct.save();
