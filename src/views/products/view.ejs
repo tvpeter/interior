@@ -22,11 +22,12 @@
             </thead>
 
             <tbody>
-              <% let n=0; products.map(product => { n++ %>
+              <% let n=0; products.map(product => { n++; 
+              %>
               <tr>
                 <th scope="row"><%= n %></th>
                 <td>
-                  image
+                <img src="<%= product.img.slice(6) %>" alt="<%= product.name %>" />
                 </td>
                 <td><%= product.name %></td>
                 <td>
