@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/adminheader %>
+
+  <section class="register-section">
+    <div class="auto-container">
+      <div class="row clearfix">
+        <% include ../partials/aside %>
+
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Image</th>
+                <th scope="col">Product</th>
+                <th scope="col">Categories</th>
+                <th scope="col">Price</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% let n=0; products.map(product => { n++ %>
+              <tr>
+                <th scope="row"><%= n %></th>
+                <td>
+                  image
+                </td>
+                <td><%= product.name %></td>
+                <td>
+                  <%= product.category[0] %> <% if(product.category[1]) {%><%=
+                  ', '+product.category[1] %> <%}%>
+                </td>
+                <td><%= product.price %></td>
+                <td><%= product.qty %></td>
+                <td><i class="fa fa-trash"></i></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <% include ../partials/adminfooter %>
+</html>

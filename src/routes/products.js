@@ -111,7 +111,24 @@ function productsRouter(nav) {
       }
     }
   );
-  return [showCreateForm, productIndex, productDetails, createProduct];
+  const viewProducts = router.get("/view", async (req, res) => {
+    const products = await Product.find({});
+    //res.contentType("image/png");
+    res.render("products/view", {
+      nav,
+      current: "Products",
+      title: "Products View",
+      header: "Product Details",
+      products
+    });
+  });
+  return [
+    showCreateForm,
+    productIndex,
+    productDetails,
+    createProduct,
+    viewProducts
+  ];
 }
 
 module.exports = productsRouter;
