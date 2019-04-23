@@ -53,7 +53,12 @@ function productsRouter(nav) {
     "/create",
     upload.single("img"),
     async (req, res) => {
-      const categories = await Category.find({}, { name: 1, _id: 0 });
+      //check if there was an image attached
+      if (req.file == null) {
+        pageDetails.error = "Select a product image";
+        return res.status(400).redirect("/products/create");
+      }
+
       //check if category1 and category2 are same
 
       if (req.body.category1 === req.body.category2) {

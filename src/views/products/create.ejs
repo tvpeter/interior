@@ -32,7 +32,7 @@
                                         
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                            <select required name="category1" id="category1">
-                                                <option selected value="">Category 1</option>
+                                                <option selected value="" disabled>Category 1</option>
                                                 <% categories.map(category => { %>
                                                 <option value="<%= category.name %>"><%= category.name %></option>
                                               <%  }); %>
@@ -40,7 +40,7 @@
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <select name="category2" id="category2">
-                                                <option selected value="">Category 2 (optional)</option>
+                                                <option selected value="" disabled>Category 2 (optional)</option>
                                                 <% categories.map(category => { %>
                                                 <option value="<%= category.name %>"><%= category.name %></option>
                                               <%  }); %>
