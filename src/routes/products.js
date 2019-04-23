@@ -6,7 +6,10 @@ const { Category } = require("../models/category");
 const { Product, validate } = require("../models/products");
 const multer = require("multer");
 
-const upload = multer({ dest: "./public/images/test/" });
+const upload = multer({
+  limits: { fileSize: 500000 },
+  dest: "./public/images/"
+});
 
 let pageDetails = {
   current: "Products",
@@ -88,9 +91,16 @@ function productsRouter(nav) {
         category: [req.body.category1, req.body.category2],
         description: req.body.description
       });
-      newProduct.img.data = fs.readFileSync(req.file.path);
-      newProduct.img.contentType = "image/png";
+      //base 64 encoding of images
+      //worthy of note is that, before encoding, image size was 16kb, after encoding size is 50kb
+      //need to check for output of these before finalizing
+      newProduct.img.data = fs.readFileSync(req.file.path).toString("base64"); //yields 16kb
 
+      // newProduct.img.data = Buffer(
+      //   fs.readFileSync(req.file.path).toString("base64"),
+      //   "base64"
+      // );//yields 50kb
+      newProduct.img.contentType = req.file.mimetype;
       try {
         await newProduct.save();
         pageDetails.error = "successfully saved";
