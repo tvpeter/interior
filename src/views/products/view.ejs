@@ -8,8 +8,8 @@
         <% include ../partials/aside %>
 
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-          <table class="table table-striped">
-            <thead class="thead-dark">
+          <table class="table table-striped cart-table">
+            <thead class="cart-header">
               <tr>
                 <th scope="col">SN</th>
                 <th scope="col">Image</th>
@@ -26,15 +26,18 @@
               %>
               <tr>
                 <th scope="row"><%= n %></th>
-                <td>
-                <img src="<%= product.img.slice(6) %>" alt="<%= product.name %>" />
+                <td class="prod-column">
+                <div class="column-box">
+                <figure class="prod-thumb"><a href="#"><img src="<%= product.img.slice(6) %>" alt=""></a></figure>
+                </div>
                 </td>
                 <td><%= product.name %></td>
                 <td>
                   <%= product.category[0] %> <% if(product.category[1]) {%><%=
                   ', '+product.category[1] %> <%}%>
                 </td>
-                <td><%= product.price %></td>
+                <td><%= new Intl.NumberFormat('en-US', { style: 'currency', currency: 'NGN' }).format(product.price)
+                 %></td>
                 <td><%= product.qty %></td>
                 <td><i class="fa fa-trash"></i></td>
               </tr>
