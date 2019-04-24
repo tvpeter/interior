@@ -2,23 +2,14 @@ const express = require("express");
 const router = express.Router();
 const { User, validate } = require("../models/user");
 
-headers = {
-  current: "Register",
-  title: "Register User",
-  header: "Register User"
-};
 function userRouter(nav, contactDetails) {
-  const getUsers = router.get("/", (req, res) => {
-    res.render("register", {
-      nav,
-      headers,
-      contactDetails
-    });
+  const showUserForm = router.get("/register", (req, res) => {
+    res.render("users/register");
   });
 
-  const postUsers = router.post("/", async (req, res) => {
+  const createUser = router.post("/", async (req, res) => {
     const result = errorCode => {
-      return res.status(errorCode).render("register", { nav, pageDetails });
+      return res.status(errorCode).redirect("users/register");
     };
 
     //return if request does not contain all params
@@ -62,6 +53,7 @@ function userRouter(nav, contactDetails) {
     });
     try {
       await newUser.save();
+      pageDetails.success = "User created successfully";
       return result(200);
     } catch (error) {
       pageDetails.error = "Oops something went wrong, try again";
@@ -69,7 +61,12 @@ function userRouter(nav, contactDetails) {
     }
   });
 
-  return [getUsers, postUsers];
+  const getUsers = router.get("/", async (req, res) => {
+    const users = await User.find({});
+    return res.status(200).render("users/users", { users });
+  });
+
+  return [showUserForm, createUser];
 }
 
 module.exports = userRouter;

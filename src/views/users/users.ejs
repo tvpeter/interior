@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/adminheader %>
+
+  <section class="register-section">
+    <div class="auto-container">
+      <div class="row clearfix">
+        <% include ../partials/aside %>
+
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+          <table class="table table-striped cart-table">
+            <thead class="cart-header">
+              <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% let n=0; users.map(user =>{ n++; 
+              %>
+              <tr>
+                <th scope="row"><%= n %></th>
+                <td><%= user.name %></td>
+                <td>
+                  <%= user.email %>
+                </td>
+                <td><%= user.phone %></td>
+                <td>
+                 <form method="post" action="/users?_method=DELETE">
+                                    <input type="hidden" name="_id" value="<%= user._id %>">
+                                    <button type="submit" class="fa fa-trash"></button></form>
+                
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <% include ../partials/adminfooter %>
+</html>
