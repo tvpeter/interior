@@ -22,13 +22,13 @@
             </thead>
 
             <tbody>
-              <% let n=0; for(let product of products) { n++; 
+              <% let n=0; products.map(product =>{ n++; 
               %>
               <tr>
                 <th scope="row"><%= n %></th>
                 <td class="prod-column">
                 <div class="column-box">
-                <figure class="prod-thumb"><a href="#"><img src="<%= product.img.slice(6) %>" alt=""></a></figure>
+                <figure class="prod-thumb"><a href="/products/<%= product._id %>"><img src="<%= product.img.slice(6) %>" alt=""></a></figure>
                 </div>
                 </td>
                 <td><%= product.name %></td>
@@ -46,7 +46,7 @@
                 
                 </td>
               </tr>
-              <% } %>
+              <% }) %>
             </tbody>
           </table>
         </div>

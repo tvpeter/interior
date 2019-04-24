@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/adminheader %>
+
+  <div class="sidebar-page-container">
+    <div class="auto-container">
+      <div class="row clearfix">
+        <% include ../partials/aside %>
+        <!--Content Side-->
+        <div class="content-side col-lg-9 col-md-8 col-sm-12 col-xs-12">
+          <!--Product Details Section-->
+          <section
+            class="products-section product-details no-padd-top no-padd-bottom"
+          >
+            <!--Basic Details-->
+            <div class="basic-details">
+              <div class="row clearfix">
+                <div class="image-column col-md-5 col-sm-6 col-xs-12">
+                  <figure class="image-box">
+                    <img
+                      class="img-responsive"
+                      src="<%= product.img.slice(6) %>"
+                      alt="<%= product.name %>"
+                    />
+                  </figure>
+                </div>
+                <div class="info-column col-md-7 col-sm-6 col-xs-12">
+                  <div class="details-header">
+                    <h4><%= product.name %></h4>
+                    <div class="item-price">N<%= product.price %></div>
+                  </div>
+
+                  <div class="text">
+                    <p>
+                      <%= product.description %>
+                    </p>
+                  </div>
+
+                  <div class="check-delivery">
+                    Stock: <%= product.qty %>
+                  </div>
+
+                  <div class="clearfix options">
+                    <div class="pull-left padd-right-20">
+                      <a href="#" class="theme-btn btn-style-one">Edit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Basic Details-->
+          </section>
+        </div>
+        <!--End Content Side-->
+      </div>
+    </div>
+  </div>
+
+  <% include ../partials/adminfooter %>
+</html>

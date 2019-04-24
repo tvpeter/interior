@@ -155,13 +155,30 @@ function productsRouter(nav) {
     return res.status(200).redirect("/products/view");
   });
 
+  const singleProduct = router.get("/:id", async (req, res) => {
+    //need to validate that its a valid object id
+
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      pageDetails.error = "Product not found";
+      return res.status(404).redirect("/products/view");
+    }
+    return res.status(200).render("products/single", {
+      nav,
+      pageDetails,
+      product
+    });
+  });
+
   return [
     showCreateForm,
     productIndex,
     productDetails,
     createProduct,
     viewProducts,
-    deleteProduct
+    deleteProduct,
+    singleProduct
   ];
 }
 
