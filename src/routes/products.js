@@ -99,7 +99,6 @@ function productsRouter(nav) {
 
       //check db for the item
       const dbProduct = await Product.findOne({ name: req.body.name });
-      //const dbProductImg = await Product.findOne({'img': req.file.originalname});
 
       if (dbProduct) {
         pageDetails.error = "Product already created";
@@ -114,15 +113,7 @@ function productsRouter(nav) {
         img: req.file.path,
         qty: req.body.qty
       });
-      //base 64 encoding of images
-      //need to check for output of these before finalizing cos different binary encoding with same size
-      //newProduct.img.data = fs.readFileSync(req.file.path).toString("base64");
 
-      // newProduct.img.data = Buffer(
-      //   fs.readFileSync(req.file.path).toString("base64"),
-      //   "base64"
-      // );
-      // newProduct.img.contentType = req.file.mimetype;
       try {
         await newProduct.save();
         pageDetails.error = "successfully saved";
@@ -151,6 +142,7 @@ function productsRouter(nav) {
       pageDetails.error = "Product not found";
       return res.status(404).redirect("/products/view");
     }
+    fs.unlinkSync(product.img);
     pageDetails.success = "Product deleted successfully";
     return res.status(200).redirect("/products/view");
   });
