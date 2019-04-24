@@ -144,12 +144,24 @@ function productsRouter(nav) {
       products
     });
   });
+  const deleteProduct = router.delete("/", async (req, res) => {
+    const product = await Product.findByIdAndDelete(req.body._id);
+
+    if (!product) {
+      pageDetails.error = "Product not found";
+      return res.status(404).redirect("/products/view");
+    }
+    pageDetails.success = "Product deleted successfully";
+    return res.status(200).redirect("/products/view");
+  });
+
   return [
     showCreateForm,
     productIndex,
     productDetails,
     createProduct,
-    viewProducts
+    viewProducts,
+    deleteProduct
   ];
 }
 

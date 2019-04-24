@@ -53,12 +53,13 @@ const categoryRouter = nav => {
   });
 
   const deleteCategory = router.delete("/", async (req, res) => {
-    const categories = await Category.find({});
+    //const categories = await Category.find({});
+    //return res.send(req.body);
     const category = await Category.findOneAndDelete(req.body._id);
 
     if (!category) {
       headers.error = "category not found";
-      return res.status(404).render("category", { nav, headers, categories });
+      return res.status(404).redirect("/category");
     }
     return res.redirect("/category");
   });
