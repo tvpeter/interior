@@ -54,7 +54,7 @@ function userRouter(nav, contactDetails) {
     });
     try {
       await newUser.save();
-      pageDetails.success = "User created successfully";
+      pageDetails.error = "User created successfully";
       return result(200);
     } catch (error) {
       pageDetails.error = "Oops something went wrong, try again";

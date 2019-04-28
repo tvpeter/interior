@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
   qty: { type: Number, required: true, min: 1 },
   price: { type: Number },
   category: [String],
-  description: { type: String, minlength: 15, maxlength: 250, required: true },
+  description: { type: String, minlength: 15, maxlength: 350, required: true },
   img: { type: String, required: true }
 });
 
@@ -30,7 +30,7 @@ const validateProduct = product => {
     category2: Joi.string(),
     description: Joi.string()
       .min(15)
-      .max(250)
+      .max(350)
       .trim()
       .required(),
     qty: Joi.number()

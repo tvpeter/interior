@@ -15,6 +15,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
+                <th scope="col">Access</th>
                 <th scope="col">Delete</th>
               </tr>
             </thead>
@@ -29,6 +30,7 @@
                   <%= user.email %>
                 </td>
                 <td><%= user.phone %></td>
+                <td><%= user.access %></td>
                 <td>
                  <form method="post" action="/users?_method=DELETE">
                                     <input type="hidden" name="_id" value="<%= user._id %>">

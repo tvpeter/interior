@@ -39,33 +39,39 @@ let pageDetails = {
 };
 
 function productsRouter(nav) {
-  const productDetails = router.get("/details", async (req, res) => {
-    let contacts = await Contact.find(
-      {},
-      { email: 1, phone: 1, address: 1, _id: 0 }
-    );
-    contacts = contacts[0];
-
-    res.render("details", {
-      nav,
-      current: "Products",
-      title: "FMG Furniture | Products",
-      header: "Product Details",
-      contacts
-    });
-  });
   const productIndex = router.get("/", async (req, res) => {
     let contacts = await Contact.find(
       {},
       { email: 1, phone: 1, address: 1, _id: 0 }
     );
     contacts = contacts[0];
+    const products = await Product.find({});
     const categories = await Category.find({}, { name: 1, _id: 0 });
     res.render("products/products", {
       nav,
       pageDetails,
       contacts,
-      categories
+      categories,
+      products
+    });
+  });
+  const showUserProduct = router.get("/v/:id", async (req, res) => {
+    let contacts = await Contact.find(
+      {},
+      { email: 1, phone: 1, address: 1, _id: 0 }
+    );
+    contacts = contacts[0];
+    const categories = await Category.find({}, { name: 1, _id: 0 });
+    const product = await Product.findById(req.params.id);
+    const related = await Product.find({ category: product.category[0] });
+    //return res.send(related);
+    return res.render("products/details", {
+      nav,
+      pageDetails,
+      product,
+      contacts,
+      categories,
+      related
     });
   });
   const showCreateForm = router.get("/create", async (req, res) => {
@@ -166,11 +172,12 @@ function productsRouter(nav) {
   return [
     showCreateForm,
     productIndex,
-    productDetails,
+    //productDetails,
     createProduct,
     viewProducts,
     deleteProduct,
-    singleProduct
+    singleProduct,
+    showUserProduct
   ];
 }
 
