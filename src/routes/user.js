@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { User, validate } = require("../models/user");
+const bcrypt = require("bcrypt");
 
 function userRouter(nav, contactDetails) {
   const showUserForm = router.get("/register", (req, res) => {
@@ -49,9 +50,11 @@ function userRouter(nav, contactDetails) {
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
-      password: req.body.password,
       access: req.body.access
     });
+    const salt = await bcrypt.genSalt(10);
+    newUser.password = await bcrypt.hash(req.body.password, salt);
+
     try {
       await newUser.save();
       pageDetails.error = "User created successfully";

@@ -30,7 +30,7 @@ const validateProduct = product => {
     category2: Joi.string(),
     description: Joi.string()
       .min(15)
-      .max(350)
+      .max(700)
       .trim()
       .required(),
     qty: Joi.number()

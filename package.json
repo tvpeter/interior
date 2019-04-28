@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/tvpeter/interior#readme",
   "dependencies": {
+    "bcrypt": "3.0.6",
     "config": "3.0.1",
     "ejs": "2.6.1",
     "express": "4.16.4",

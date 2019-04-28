@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     minlength: 11,
     maxlength: 15
   },
-  password: { type: String, required: true, minlength: 6, maxlength: 24 },
+  password: { type: String, required: true, minlength: 6, maxlength: 1024 },
   access: { type: String, required: true, enum: ACCESSLEVEL }
 });
 
