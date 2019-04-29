@@ -35,6 +35,7 @@ const contact = require("./src/routes/contact")(nav);
 const products = require("./src/routes/products")(nav);
 const index = require("./src/routes/index")(nav);
 const category = require("./src/routes/category")(nav);
+const auth = require("./src/routes/auth")(nav);
 
 app.use("/users", users);
 app.use("/about", about);
@@ -42,6 +43,7 @@ app.use("/services", services);
 app.use("/contact", contact);
 app.use("/products", products);
 app.use("/category", category);
+app.use("/auth", auth);
 app.use("/", index);
 
 const server = app.listen(port, () => {
