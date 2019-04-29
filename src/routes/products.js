@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
-const { Contact } = require("../models/contact");
 const { Category } = require("../models/category");
 const { Product, validate } = require("../models/products");
 const multer = require("multer");
 const auth = require("../../middlewares/auth");
+const headers = require("../../middlewares/headers");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -40,28 +40,18 @@ let pageDetails = {
 };
 
 function productsRouter(nav) {
-  const productIndex = router.get("/", auth, async (req, res) => {
-    let contacts = await Contact.find(
-      {},
-      { email: 1, phone: 1, address: 1, _id: 0 }
-    );
-    contacts = contacts[0];
+  const productIndex = router.get("/", headers, async (req, res) => {
     const products = await Product.find({});
     const categories = await Category.find({}, { name: 1, _id: 0 });
     res.render("products/products", {
       nav,
       pageDetails,
-      contacts,
+      contacts: res.locals.contacts,
       categories,
       products
     });
   });
-  const showUserProduct = router.get("/v/:id", async (req, res) => {
-    let contacts = await Contact.find(
-      {},
-      { email: 1, phone: 1, address: 1, _id: 0 }
-    );
-    contacts = contacts[0];
+  const showUserProduct = router.get("/v/:id", headers, async (req, res) => {
     const categories = await Category.find({}, { name: 1, _id: 0 });
     const product = await Product.findById(req.params.id);
     const related = await Product.find({ category: product.category[0] });
@@ -70,7 +60,7 @@ function productsRouter(nav) {
       nav,
       pageDetails,
       product,
-      contacts,
+      contacts: res.locals.contacts,
       categories,
       related
     });

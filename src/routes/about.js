@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Contact } = require("../models/contact");
+const headers = require("../../middlewares/headers");
 const {
   Quality,
   validateQuality,
@@ -17,17 +17,12 @@ let pageDetails = {
 
 let qualities = "";
 function aboutRouter(nav) {
-  const aboutIndex = router.get("/", async (req, res) => {
-    let contacts = await Contact.find(
-      {},
-      { address: 1, email: 1, phone: 1, _id: 0 }
-    );
-    contacts = contacts[0];
+  const aboutIndex = router.get("/", headers, async (req, res) => {
     qualities = await Quality.find({});
     res.render("about/about", {
       nav,
       pageDetails,
-      contacts,
+      contacts: res.locals.contacts,
       qualities
     });
   });
