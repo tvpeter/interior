@@ -2,13 +2,14 @@ const express = require("express");
 const router = express.Router();
 const { User, validate } = require("../models/user");
 const bcrypt = require("bcrypt");
+const auth = require("../../middlewares/auth");
 
 function userRouter(nav, contactDetails) {
-  const showUserForm = router.get("/register", (req, res) => {
+  const showUserForm = router.get("/register", auth, (req, res) => {
     res.render("users/register");
   });
 
-  const createUser = router.post("/", async (req, res) => {
+  const createUser = router.post("/", auth, async (req, res) => {
     const result = errorCode => {
       return res.status(errorCode).redirect("users/register");
     };
@@ -65,7 +66,7 @@ function userRouter(nav, contactDetails) {
     }
   });
 
-  const getUsers = router.get("/", async (req, res) => {
+  const getUsers = router.get("/", auth, async (req, res) => {
     const users = await User.find({});
     return res.status(200).render("users/users", { users });
   });

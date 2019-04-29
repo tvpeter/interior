@@ -5,6 +5,7 @@ const { Contact } = require("../models/contact");
 const { Category } = require("../models/category");
 const { Product, validate } = require("../models/products");
 const multer = require("multer");
+const auth = require("../../middlewares/auth");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -39,7 +40,7 @@ let pageDetails = {
 };
 
 function productsRouter(nav) {
-  const productIndex = router.get("/", async (req, res) => {
+  const productIndex = router.get("/", auth, async (req, res) => {
     let contacts = await Contact.find(
       {},
       { email: 1, phone: 1, address: 1, _id: 0 }
@@ -74,7 +75,7 @@ function productsRouter(nav) {
       related
     });
   });
-  const showCreateForm = router.get("/create", async (req, res) => {
+  const showCreateForm = router.get("/create", auth, async (req, res) => {
     const categories = await Category.find({}, { name: 1, _id: 0 });
     pageDetails.header = "Create Product";
     res.render("products/create", { pageDetails, nav, categories });
@@ -141,7 +142,7 @@ function productsRouter(nav) {
       products
     });
   });
-  const deleteProduct = router.delete("/", async (req, res) => {
+  const deleteProduct = router.delete("/", auth, async (req, res) => {
     const product = await Product.findByIdAndDelete(req.body._id);
 
     if (!product) {
@@ -153,7 +154,7 @@ function productsRouter(nav) {
     return res.status(200).redirect("/products/view");
   });
 
-  const singleProduct = router.get("/:id", async (req, res) => {
+  const singleProduct = router.get("/:id", auth, async (req, res) => {
     //need to validate that its a valid object id
 
     const product = await Product.findById(req.params.id);

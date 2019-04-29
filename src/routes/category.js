@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const { Category, validate } = require("../models/category");
+const auth = require("../../middlewares/auth");
 
 const headers = {
   header: "Create Products Category"
 };
 
 const categoryRouter = nav => {
-  const categoryForm = router.get("/", async (req, res) => {
+  const categoryForm = router.get("/", auth, async (req, res) => {
     const categories = await Category.find({});
 
     res.status(200).render("category", {
@@ -17,7 +18,7 @@ const categoryRouter = nav => {
     });
   });
 
-  const createCategory = router.post("/", async (req, res) => {
+  const createCategory = router.post("/", auth, async (req, res) => {
     const categories = await Category.find({});
     //check name is supplied
     const { error } = validate(req.body);
@@ -52,7 +53,7 @@ const categoryRouter = nav => {
     }
   });
 
-  const deleteCategory = router.delete("/", async (req, res) => {
+  const deleteCategory = router.delete("/", auth, async (req, res) => {
     //const categories = await Category.find({});
     //return res.send(req.body);
     const category = await Category.findOneAndDelete(req.body._id);
