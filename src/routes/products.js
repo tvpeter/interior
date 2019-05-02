@@ -73,6 +73,7 @@ function productsRouter(nav) {
   const createProduct = router.post(
     "/create",
     upload.single("img"),
+    auth,
     async (req, res) => {
       //check if there was an image attached
       if (req.file == null) {
@@ -123,12 +124,9 @@ function productsRouter(nav) {
   );
   const viewProducts = router.get("/view", async (req, res) => {
     const products = await Product.find({});
-    //res.contentType("image/png");
+
     res.render("products/view", {
-      nav,
-      current: "Products",
       title: "Products View",
-      header: "Product Details",
       products
     });
   });
@@ -163,7 +161,6 @@ function productsRouter(nav) {
   return [
     showCreateForm,
     productIndex,
-    //productDetails,
     createProduct,
     viewProducts,
     deleteProduct,

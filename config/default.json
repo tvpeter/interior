@@ -1,3 +1,4 @@
 {
-    "db":"mongodb://localhost/interior"
+  "db": "mongodb://localhost/interior",
+  "jwtInteriorKey": ""
 }

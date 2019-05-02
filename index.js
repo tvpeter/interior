@@ -1,8 +1,8 @@
 const express = require("express");
 const methodOverride = require("method-override");
 const path = require("path");
-//const multer = require("multer");
 const app = express();
+const config = require("config");
 
 // override with POST having ?_method=DELETE
 app.use(methodOverride("_method"));
@@ -17,6 +17,10 @@ const port = process.env.PORT || 3000;
 
 require("./startup/db")();
 
+if (!config.get("jwtInteriorKey")) {
+  throw new Error("Fatal: jwtInteriorKey is not set");
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -28,7 +32,14 @@ const nav = [
   { link: "/contact", title: "Contact" }
 ];
 
-const users = require("./src/routes/user")(nav);
+app.get("/logout", (req, res) => {
+  if(req.header("x-auth-token")){
+    req.header("x-auth-token") = null;
+  }
+  return res.redirect("/");
+});
+
+const users = require("./src/routes/user");
 const about = require("./src/routes/about")(nav);
 const services = require("./src/routes/services")(nav);
 const contact = require("./src/routes/contact")(nav);

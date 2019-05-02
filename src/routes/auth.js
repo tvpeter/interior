@@ -1,20 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
-const { Contact } = require("../models/contact");
 const { User } = require("../models/user");
 const bcrypt = require("bcrypt");
+const headers = require("../../middlewares/headers");
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
 function authRouter(nav) {
   let msg = "";
-  const showLogin = router.get("/", async (req, res) => {
-    let contacts = await Contact.find(
-      {},
-      { address: 1, email: 1, phone: 1, _id: 0 }
-    );
-    contacts = contacts[0];
+  const showLogin = router.get("/", headers, async (req, res) => {
     res.status(200).render("auth", {
-      contacts,
+      contacts: res.locals.contacts,
       nav,
       msg
     });
@@ -41,7 +38,13 @@ function authRouter(nav) {
     }
     const token = user.generateAuthToken();
 
-    return res.header("x-auth-token", token).redirect("products/view");
+    //const products = await Product.find({});
+
+    //req.setHeader("x-auth-token", token);
+    return res
+      .header("x-auth-token", token)
+      .status(200)
+      .redirect("products/view");
   });
 
   return [showLogin, login];
