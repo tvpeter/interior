@@ -41,7 +41,9 @@ function authRouter(nav) {
     //const products = await Product.find({});
 
     //req.setHeader("x-auth-token", token);
-    return res
+    // res.cookie('jwt', jwt, { httpOnly: true, secure: true });
+
+    res
       .header("x-auth-token", token)
       .status(200)
       .redirect("products/view");
