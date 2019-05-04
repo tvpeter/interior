@@ -3,6 +3,7 @@ const methodOverride = require("method-override");
 const path = require("path");
 const app = express();
 const config = require("config");
+const cookieParser = require("cookie-parser");
 
 // override with POST having ?_method=DELETE
 app.use(methodOverride("_method"));
@@ -12,6 +13,7 @@ app.use(express.static(path.join(__dirname, "public/")));
 app.use("/css", express.static(path.join(__dirname, "public/css/")));
 app.use("/js", express.static(path.join(__dirname, "public/js/")));
 app.use("/images", express.static(path.join(__dirname, "public/images/")));
+app.use(cookieParser());
 
 const port = process.env.PORT || 3000;
 
@@ -33,9 +35,7 @@ const nav = [
 ];
 
 app.get("/logout", (req, res) => {
-  if(req.header("x-auth-token")){
-    req.header("x-auth-token") = null;
-  }
+  res.clearCookie["fmgnerd"];
   return res.redirect("/");
 });
 

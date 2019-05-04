@@ -4,8 +4,6 @@ const Joi = require("joi");
 const { User } = require("../models/user");
 const bcrypt = require("bcrypt");
 const headers = require("../../middlewares/headers");
-const jwt = require("jsonwebtoken");
-const config = require("config");
 
 function authRouter(nav) {
   let msg = "";
@@ -38,15 +36,8 @@ function authRouter(nav) {
     }
     const token = user.generateAuthToken();
 
-    //const products = await Product.find({});
-
-    //req.setHeader("x-auth-token", token);
-    // res.cookie('jwt', jwt, { httpOnly: true, secure: true });
-
-    res
-      .header("x-auth-token", token)
-      .status(200)
-      .redirect("products/view");
+    res.cookie("fmgnerd", token, { httpOnly: true });
+    res.status(200).render("users/register");
   });
 
   return [showLogin, login];

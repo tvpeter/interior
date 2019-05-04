@@ -28,10 +28,10 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = function() {
   const token = jwt.sign(
-    { _id: this._id, access: this.access },
+    { _id: this._id, name: this.name, access: this.access },
     config.get("jwtInteriorKey"),
     {
-      expiresIn: 86400
+      expiresIn: "1h"
     }
   );
   return token;
