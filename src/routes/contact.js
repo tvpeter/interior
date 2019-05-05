@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Contact, validate } = require("../models/contact");
 const headers = require("../../middlewares/headers");
+const auth = require("../../middlewares/auth");
 
 let pageDetails = {
   current: "Contact",
@@ -18,11 +19,11 @@ function contactRouter(nav) {
     });
   });
 
-  const contactForm = router.get("/create", (req, res) => {
-    res.render("contact/create", { nav, pageDetails, contactDetails });
+  const contactForm = router.get("/create", auth, (req, res) => {
+    res.render("contact/create");
   });
 
-  const createContact = router.post("/create", async (req, res) => {
+  const createContact = router.post("/create", auth, async (req, res) => {
     // validate that the details are complete
     const { error } = validate(req.body);
     if (error) {
