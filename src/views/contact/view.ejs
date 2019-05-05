@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/adminheader %>
+  <!--Page Info-->
+  <section class="page-info"></section>
+
+  <!--Contact Section-->
+  <section class="contact-section">
+    <div class="auto-container">
+      <div class="row clearfix">
+        <% include ../partials/aside %>
+        <div
+          class="column form-column col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1"
+        >
+          <!--Form Column -->
+            <div class="sec-title medium"><h2>Contact Details</h2></div>
+            <div class="desc-text">
+              Do note that these are major contact details shown all over the
+              site
+            </div>
+            <div class="info-style-one">
+                <% for (let contact of contacts) { %>
+              <ul>
+                <li>
+                  <div class="icon-box">
+                    <span class="flaticon-international-delivery"></span>
+                  </div>
+                  <h4>Address :</h4>
+                  <div class="text">
+                    <%= contact.address %>>
+                  </div>
+                </li>
+                <li>
+                  <div class="icon-box">
+                    <span class="flaticon-envelope"></span>
+                  </div>
+                  <h4>Mail :</h4>
+                  <div class="text"><%= contact.email %></div>
+                </li>
+                <li>
+                  <div class="icon-box">
+                    <span class="flaticon-phone-call"></span>
+                  </div>
+                  <h4>Phone Numbers:</h4>
+                  <div class="text">
+                        <% for(let phone of contact.phone ) {%>
+                            <%= phone %> <% } %>      
+                  </div>
+                </li>
+                <button type="submit" class="theme-btn btn-style-two">
+                        Edit
+                      </button>
+              </ul>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <% include ../partials/adminfooter %>
+</html>
