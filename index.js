@@ -5,6 +5,7 @@ const app = express();
 const config = require("config");
 const cookieParser = require("cookie-parser");
 
+app.use(cookieParser());
 // override with POST having ?_method=DELETE
 app.use(methodOverride("_method"));
 app.set("views", "./src/views/");
@@ -13,14 +14,13 @@ app.use(express.static(path.join(__dirname, "public/")));
 app.use("/css", express.static(path.join(__dirname, "public/css/")));
 app.use("/js", express.static(path.join(__dirname, "public/js/")));
 app.use("/images", express.static(path.join(__dirname, "public/images/")));
-app.use(cookieParser());
 
 const port = process.env.PORT || 3000;
 
 require("./startup/db")();
 
 if (!config.get("jwtInteriorKey")) {
-  throw new Error("Fatal: jwtInteriorKey is not set");
+  throw new Error("Fatal: jwtInteriorKey");
 }
 
 app.use(express.json());

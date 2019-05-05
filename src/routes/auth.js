@@ -37,7 +37,7 @@ function authRouter(nav) {
     const token = user.generateAuthToken();
 
     res.cookie("fmgnerd", token, { httpOnly: true });
-    res.status(200).render("users/register");
+    res.status(200).redirect("users/register");
   });
 
   return [showLogin, login];
