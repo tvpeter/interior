@@ -31,7 +31,7 @@ userSchema.methods.generateAuthToken = function() {
     { _id: this._id, name: this.name, access: this.access },
     config.get("jwtInteriorKey"),
     {
-      expiresIn: "1h"
+      expiresIn: "2h"
     }
   );
   return token;

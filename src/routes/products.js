@@ -6,6 +6,14 @@ const { Product, validate } = require("../models/products");
 const multer = require("multer");
 const auth = require("../../middlewares/auth");
 const headers = require("../../middlewares/headers");
+const config = require("config");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: config.get("CLOUDINARY_NAME"),
+  api_key: config.get("CLOUDINARY_API"),
+  api_secret: config.get("CLOUDINARY_SECRET")
+});
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -102,27 +110,42 @@ function productsRouter(nav) {
         pageDetails.error = "Product already created";
         return res.status(400).redirect("/products/create");
       }
-      //create the item
-      const newProduct = new Product({
-        name: req.body.name,
-        price: req.body.price,
-        category: [req.body.category1, req.body.category2],
-        description: req.body.description,
-        img: req.file.path,
-        qty: req.body.qty
-      });
 
       try {
-        await newProduct.save();
-        pageDetails.error = "successfully saved";
-        return res.status(200).redirect("/products/create");
+        const image = await cloudinary.uploader.upload(req.file.path, {
+          folder: "fmg/",
+          width: 270,
+          height: 238,
+          crop: "limit",
+          quality: "auto",
+          format: "png"
+        });
+        //create the item
+        const newProduct = new Product({
+          name: req.body.name,
+          price: req.body.price,
+          category: [req.body.category1, req.body.category2],
+          description: req.body.description,
+          img: image.url,
+          qty: req.body.qty
+        });
+
+        try {
+          await newProduct.save();
+          fs.unlinkSync(req.file.path);
+          pageDetails.error = "successfully saved";
+          return res.status(200).redirect("/products/create");
+        } catch (error) {
+          pageDetails.error = error;
+          return res.status(409).redirect("/products/create");
+        }
       } catch (error) {
-        pageDetails.error = error;
-        return res.status(409).redirect("/products/create");
+        pageDetails.error = error.message;
+        return res.status(400).redirect("/products/create");
       }
     }
   );
-  const viewProducts = router.get("/view", async (req, res) => {
+  const viewProducts = router.get("/view", auth, async (req, res) => {
     const products = await Product.find({});
 
     res.render("products/view", {
@@ -137,7 +160,9 @@ function productsRouter(nav) {
       pageDetails.error = "Product not found";
       return res.status(404).redirect("/products/view");
     }
-    fs.unlinkSync(product.img);
+    //fs.unlinkSync(product.img);
+    await cloudinary.v2.uploader.destroy(product.img);
+
     pageDetails.success = "Product deleted successfully";
     return res.status(200).redirect("/products/view");
   });
