@@ -1,7 +1,0 @@
-{
-  "db": "mongodb://localhost/interior",
-  "jwtInteriorKey": "",
-  "CLOUDINARY_NAME": "CLOUDINARY_NAME",
-  "CLOUDINARY_API": "CLOUDINARY_API",
-  "CLOUDINARY_SECRET": "CLOUDINARY_SECRET"
-}
