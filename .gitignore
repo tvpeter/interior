@@ -65,5 +65,7 @@ fonts/
 images/
 public/
 js/
+config/default.json
+
 
 

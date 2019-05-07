@@ -45,7 +45,7 @@
                 <!--image-box-->
                 <figure class="image-box">
                   <a href="products/v/<%= product._id %>"
-                    ><img src="<%= product.img.slice(6) %>" alt=""
+                    ><img src="<%= product.img %>" alt="<%= product.name %>"
                   /></a>
                 </figure>
 
@@ -62,7 +62,7 @@
                     <a class="cart-btn" href="#">Request Price</a>
                     <a
                       class="zoom-btn lightbox-image"
-                      href="<%= product.img.slice(6) %>"
+                      href="<%= product.img %>"
                       title="<%= product.name %>"
                       ><span class="fa fa-search-plus" title="Quick View"></span
                     ></a>

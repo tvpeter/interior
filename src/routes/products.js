@@ -161,7 +161,13 @@ function productsRouter(nav) {
       return res.status(404).redirect("/products/view");
     }
     //fs.unlinkSync(product.img);
-    await cloudinary.v2.uploader.destroy(product.img);
+    try {
+      //await cloudinary.uploader.destroy(product.img);
+      await cloudinary.api.delete_resources([product.img]);
+    } catch (error) {
+      pageDetails.error = error.message;
+      return res.status(400).redirect("/products/view");
+    }
 
     pageDetails.success = "Product deleted successfully";
     return res.status(200).redirect("/products/view");

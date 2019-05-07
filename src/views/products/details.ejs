@@ -32,8 +32,8 @@
                 <figure class="image-box">
                   <img
                     class="img-responsive"
-                    src="<%= product.img.slice(6) %>"
-                    alt=""
+                    src="<%= product.img %>"
+                    alt="<%= product.name %>"
                   />
                 </figure>
               </div>
@@ -75,7 +75,7 @@
                 <!--image-box-->
                 <figure class="image-box">
                   <a href="<%= item._id %>"
-                    ><img src="<%= item.img.slice(6) %>" alt=""
+                    ><img src="<%= item.img %>" alt="<%= item.name %>"
                   /></a>
                 </figure>
 
